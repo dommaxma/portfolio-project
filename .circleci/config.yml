@@ -1,0 +1,22 @@
+version: 2.1 # Circle CI config syntax version
+
+jobs: # Define jobs CircleCI can run
+  check: # Define job named check
+    docker: # Run inside Docker container
+      - image: cimg/python:3.12.12 # Matching local python version
+    steps: # Define job steps
+      - checkout # Download repo code inside container
+      - run: # Start 1st command-based step
+          name: Install Poetry # Step name
+          command: pip install --upgrade poetry==2.5.1
+      - run: # Start 2nd command-based step
+          name: Install dependencies # Step name
+          command: make install # Run install job from Makefile
+      - run: # Start 3rd command-based step
+          name: Run checks # Step name
+          command: make check # Run check job from Makefile
+
+workflows: # Define jobs running together as workflows
+  checks: # Define a new workflow named "checks"
+    jobs: # List jobs included in "checks" workflow
+      - check # Run the "check" job defined above

@@ -1,0 +1,50 @@
+[project]
+name = "portfolio-project"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "dommaxma",email = "dominikma00@gmail.com"}
+]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "streamlit (>=1.66.0,<2.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.1.1,<10.0.0)",
+    "pytest-cov (>=7.1.0,<8.0.0)",
+    "ruff (>=0.17.1,<0.18.0)",
+    "black (>=26.10.1,<27.0.0)",
+    "mypy (>=2.4.0,<3.0.0)"
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "N", "UP", "B"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "--cov=portfolio_project",
+    "--cov-report=term-missing",
+]
